@@ -1,0 +1,58 @@
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+
+*.key
+*.pem
+*.p12
+*.pfx
+
+secrets/
+private/
+
+# Databases and dumps
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Backups and archives
+backups/
+backup/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.next/
+.vite/
+
+# Logs
+*.log
+*.pid
+
+# macOS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# SSH private keys
+id_rsa
+id_rsa_*
+id_ed25519
+id_ed25519_*
+id_ecdsa
+id_ecdsa_*
