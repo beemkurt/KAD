@@ -1,50 +1,50 @@
-# KAD — Current State
+# KAD — Текущее состояние
 
 > Быстрая точка входа в проект после перерыва.
 > Этот файл должен отвечать на вопрос: «Где мы сейчас и что делать дальше?»
 
-## Current phase
+## Текущий этап
 
-Project organization and stabilization preparation.
+Организация проекта и подготовка к стабилизации.
 
-## Current status
+## Текущее состояние
 
-- GitHub repository created
-- Repository is public
-- 2FA and passkey enabled on GitHub account
-- ChatGPT has access to the repository
-- Security-focused `.gitignore` added
-- Existing KAD infrastructure has not yet been audited against documentation
+- GitHub-репозиторий создан
+- Репозиторий публичный
+- На GitHub-аккаунте включены 2FA и passkey
+- ChatGPT имеет доступ к репозиторию
+- Добавлен `.gitignore` с упором на защиту секретов и служебных файлов
+- Существующая инфраструктура KAD пока не сверена с документацией через аудит
 
-## Current goal
+## Текущая цель
 
-Create a reliable external source of truth for KAD before making further infrastructure changes.
+Создать надёжный внешний источник правды для KAD до дальнейших изменений инфраструктуры.
 
-## Next step
+## Следующий шаг
 
-Create the initial project documentation structure and transfer known KAD context into it.
+Создать базовую структуру документации проекта и перенести в неё известный контекст KAD.
 
-## Important
+## Важно
 
-Information from old chats and memory is not automatically considered verified.
+Информация из старых чатов и памяти не считается автоматически подтверждённой.
 
-Technical facts will have one of these statuses:
+Для технических фактов используем статусы:
 
-- `VERIFIED` — confirmed from the actual system
-- `KNOWN` — previously confirmed, but may be outdated
-- `NEEDS VERIFICATION` — must be checked during audit
-- `PLANNED` — not implemented yet
+- `VERIFIED` — подтверждено непосредственно на действующей системе
+- `KNOWN` — было подтверждено ранее, но могло устареть
+- `NEEDS VERIFICATION` — требуется проверить во время аудита
+- `PLANNED` — запланировано, но ещё не реализовано
 
-## Current technical priority
+## Текущие технические приоритеты
 
-1. Finish project documentation foundation
-2. Perform read-only VPS audit
-3. Restore VPN if still unavailable
-4. Permanently fix TLS certificate renewal
-5. Review current technology stack
-6. Define target architecture
-7. Build roadmap and first stabilization sprint
+1. Завершить базовую структуру проектной документации
+2. Провести read-only аудит VPS
+3. Восстановить VPN, если он всё ещё недоступен
+4. Навсегда исправить автоматическое продление TLS-сертификата
+5. Проверить актуальность текущего технологического стека
+6. Определить целевую архитектуру
+7. Сформировать roadmap и первый стабилизационный sprint
 
-## Last updated
+## Последнее обновление
 
 2026-08-13
