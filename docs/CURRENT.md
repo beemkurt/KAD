@@ -6,7 +6,9 @@
 
 ## Текущий этап
 
-`READ-ONLY INFRASTRUCTURE AUDIT` — следующий этап после завершённого `PROJECT FOUNDATION`.
+`PROJECT MANAGEMENT SETUP` — `COMPLETED` 2026-08-25.
+
+Следующий этап — `READ-ONLY INFRASTRUCTURE AUDIT`.
 
 ## Что подтверждено сейчас
 
@@ -16,6 +18,9 @@
 - ветка по умолчанию — `main`;
 - базовая проектная документация находится в `main` и связана навигацией;
 - Project Foundation завершён документально;
+- публичный GitHub Project [`KAD`](https://github.com/users/beemkurt/projects/1) настроен со статусами `Backlog`, `Planned`, `In Progress`, `Review` и `Done`;
+- GitHub Issues используются как единица работы, а шесть ближайших задач добавлены в Project через auto-add;
+- Project Management Setup завершён, следующая техническая задача — [`Read-only audit VPS`](https://github.com/beemkurt/KAD/issues/1);
 - в отслеживаемом дереве нет исходного кода, production-конфигурации, базы данных или резервных копий;
 - проверка живой инфраструктуры в рамках Foundation не выполнялась.
 
@@ -44,7 +49,7 @@
 
 ## Следующий практический шаг
 
-Провести **read-only аудит VPS** по [чек-листу](runbooks/README.md#read-only-аудит-vps), не меняя сервисы и конфигурацию.
+Взять в работу [`Read-only audit VPS`](https://github.com/beemkurt/KAD/issues/1) и провести аудит по [чек-листу](runbooks/README.md#read-only-аудит-vps), не меняя сервисы и конфигурацию.
 
 Результат аудита должен:
 
