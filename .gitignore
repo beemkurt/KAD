@@ -40,7 +40,7 @@ build/
 .next/
 .vite/
 
-# Logs
+# Logs and runtime files
 *.log
 *.pid
 
@@ -48,6 +48,9 @@ build/
 .DS_Store
 .idea/
 .vscode/
+*.swp
+*.swo
+*~
 
 # SSH private keys
 id_rsa
