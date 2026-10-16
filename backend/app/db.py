@@ -7,7 +7,7 @@ from typing import Any
 from app.migrations import apply_migrations
 
 
-DB_PATH = Path("/opt/kad-bot/data/kad.db")
+DB_PATH = Path("/var/lib/kad/kad.db")
 
 
 SCHEMA = """

@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     public_subscription_url_base: str = "https://sub.kaditsolution.site/s"
 
     model_config = SettingsConfigDict(
-        env_file="/opt/kad-bot/.env",
+        env_file="/etc/kad/kad.env",
         env_file_encoding="utf-8",
         extra="ignore",
     )
