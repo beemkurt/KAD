@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
+    <meta name="theme-color" content="#080a10">
+    <title>KAD VPN</title>
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="/app.js" defer></script>
+</head>
+
+<body>
+    <canvas id="network" aria-hidden="true"></canvas>
+
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">K</div>
+
+                <div>
+                    <div class="brand-name">KAD</div>
+                    <div class="brand-subtitle">PRIVATE NETWORK</div>
+                </div>
+            </div>
+
+            <div class="server-status">
+                <span class="status-dot"></span>
+                Online
+            </div>
+        </header>
+
+        <main>
+            <section
+                class="screen active"
+                data-screen="home"
+            >
+                <section class="hero">
+                <div class="eyebrow">ЛИЧНОЕ ПРОСТРАНСТВО</div>
+
+                <h1 id="greeting">Добро пожаловать</h1>
+
+                <p>
+                    Быстрое и безопасное подключение
+                    к вашей частной сети.
+                </p>
+            </section>
+
+            <section class="glass-card subscription-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-label">ПОДПИСКА</div>
+                        <h2 id="planName">Загрузка...</h2>
+                    </div>
+
+                    <div
+                        id="statusPill"
+                        class="status-pill loading"
+                    >
+                        Проверяем
+                    </div>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <span class="metric-label">
+                            Действует до
+                        </span>
+
+                        <strong id="expiresAt">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="metric">
+                        <span class="metric-label">
+                            Трафик
+                        </span>
+
+                        <strong id="trafficValue">
+                            ∞
+                        </strong>
+                    </div>
+                </div>
+
+                <button
+                    id="connectButton"
+                    class="primary-button"
+                    type="button"
+                    disabled
+                >
+                    <span class="button-icon">↗</span>
+                    Получить ссылку
+                </button>
+
+                <p class="button-note">
+                    Ссылка копируется в буфер обмена
+                    и не отображается на экране.
+                </p>
+            </section>
+            </section>
+
+            <section
+                class="screen"
+                data-screen="plans"
+            >
+                <section class="section-block">
+                    <div class="section-heading">
+                    <div>
+                        <div class="card-label">ТАРИФЫ</div>
+                        <h2>Выберите период</h2>
+                    </div>
+
+                    <span class="section-badge">
+                        Безлимит
+                    </span>
+                </div>
+
+                <div
+                    id="currentOrderCard"
+                    class="current-order-card"
+                    hidden
+                >
+                    <div class="current-order-header">
+                        <div>
+                            <div class="card-label">
+                                ПОСЛЕДНИЙ ЗАКАЗ
+                            </div>
+
+                            <strong id="currentOrderTitle">
+                                —
+                            </strong>
+                        </div>
+
+                        <span
+                            id="currentOrderBadge"
+                            class="current-order-badge"
+                        >
+                            —
+                        </span>
+                    </div>
+
+                    <div class="current-order-details">
+                        <span id="currentOrderPrice">—</span>
+                        <span id="currentOrderMessage">—</span>
+                    </div>
+                </div>
+
+                <div
+                    id="plansList"
+                    class="plans-list"
+                >
+                    <div class="plan-skeleton"></div>
+                    <div class="plan-skeleton"></div>
+                </div>
+                </section>
+            </section>
+
+            <section
+                class="screen"
+                data-screen="connection"
+            >
+                <section class="section-block screen-panel">
+                    <div class="section-heading">
+                        <div>
+                            <div class="card-label">
+                                ПОДКЛЮЧЕНИЕ
+                            </div>
+
+                            <h2>Подключите устройство</h2>
+                        </div>
+
+                        <span class="section-badge">
+                            Безопасно
+                        </span>
+                    </div>
+
+                    <div class="connection-steps">
+                        <div class="connection-step">
+                            <span class="step-number">1</span>
+
+                            <div>
+                                <strong>
+                                    Получите ссылку
+                                </strong>
+
+                                <p>
+                                    Она является вашим личным
+                                    ключом доступа к VPN.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="connection-step">
+                            <span class="step-number">2</span>
+
+                            <div>
+                                <strong>
+                                    Добавьте её в приложение
+                                </strong>
+
+                                <p>
+                                    Скопируйте ссылку и вставьте
+                                    её в поддерживаемый VPN-клиент.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="connection-step">
+                            <span class="step-number">3</span>
+
+                            <div>
+                                <strong>
+                                    Включите VPN
+                                </strong>
+
+                                <p>
+                                    После импорта выберите сервер
+                                    KAD и запустите подключение.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        id="connectionPageButton"
+                        class="primary-button"
+                        type="button"
+                        disabled
+                    >
+                        <span class="button-icon">↗</span>
+                        Скопировать ссылку
+                    </button>
+
+                    <p class="button-note">
+                        Ссылка не показывается на экране
+                        и копируется напрямую в буфер обмена.
+                    </p>
+                </section>
+            </section>
+
+            <section
+                class="screen"
+                data-screen="profile"
+            >
+                <section class="section-block screen-panel">
+                    <div class="section-heading">
+                        <div>
+                            <div class="card-label">
+                                ПРОФИЛЬ
+                            </div>
+
+                            <h2 id="profileName">
+                                Пользователь Telegram
+                            </h2>
+                        </div>
+
+                        <span
+                            id="profileSubscriptionStatus"
+                            class="section-badge"
+                        >
+                            Загрузка
+                        </span>
+                    </div>
+
+                    <div class="profile-list">
+                        <div class="profile-row">
+                            <span>Имя пользователя</span>
+                            <strong id="profileUsername">—</strong>
+                        </div>
+
+                        <div class="profile-row">
+                            <span>Telegram ID</span>
+                            <strong id="profileTelegramId">—</strong>
+                        </div>
+
+                        <div class="profile-row">
+                            <span>Трафик</span>
+                            <strong>Безлимитный</strong>
+                        </div>
+
+                        <div class="profile-row">
+                            <span>Поддержка</span>
+                            <strong>Скоро</strong>
+                        </div>
+                    </div>
+
+                    <div class="profile-note">
+                        Управление устройствами, поддержка
+                        и история платежей появятся здесь
+                        на следующих этапах.
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button
+                class="nav-item active"
+                type="button"
+                data-page="home"
+            >
+                <span class="nav-icon">⌂</span>
+                <span>Главная</span>
+            </button>
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="plans"
+            >
+                <span class="nav-icon">◇</span>
+                <span>Тарифы</span>
+            </button>
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="connection"
+            >
+                <span class="nav-icon">↗</span>
+                <span>Подключение</span>
+            </button>
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page="profile"
+            >
+                <span class="nav-icon">○</span>
+                <span>Профиль</span>
+            </button>
+        </nav>
+    </div>
+
+    <div
+        id="planSheetBackdrop"
+        class="plan-sheet-backdrop"
+        hidden
+    >
+        <section
+            class="plan-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="planSheetHeading"
+        >
+            <div class="plan-sheet-header">
+                <div>
+                    <div class="card-label">
+                        ПОДТВЕРЖДЕНИЕ
+                    </div>
+
+                    <h2 id="planSheetHeading">
+                        Выбранный тариф
+                    </h2>
+                </div>
+
+                <button
+                    id="planSheetClose"
+                    class="plan-sheet-close"
+                    type="button"
+                    aria-label="Закрыть"
+                >
+                    ×
+                </button>
+            </div>
+
+            <div class="plan-sheet-summary">
+                <div>
+                    <span>Тариф</span>
+
+                    <strong id="planSheetTitle">
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Срок</span>
+
+                    <strong id="planSheetDuration">
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <span>К оплате</span>
+
+                    <strong id="planSheetPrice">
+                        —
+                    </strong>
+                </div>
+            </div>
+
+            <div
+                id="planSheetStatus"
+                class="plan-sheet-status"
+                role="status"
+                aria-live="polite"
+                hidden
+            ></div>
+
+            <button
+                id="createOrderButton"
+                class="primary-button"
+                type="button"
+            >
+                Создать заказ
+            </button>
+
+            <p class="button-note">
+                Сейчас создаётся только тестовый заказ.
+                Реальное списание денег пока не выполняется.
+            </p>
+        </section>
+    </div>
+
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+</body>
+</html>
