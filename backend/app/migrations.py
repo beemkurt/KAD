@@ -260,6 +260,18 @@ MIGRATIONS += (
 )
 
 
+
+MIGRATIONS += (
+    (
+        4,
+        "allow_multiple_vpn_clients_per_user",
+        """
+        DROP INDEX IF EXISTS uq_vpn_clients_user;
+        """,
+    ),
+)
+
+
 def apply_migrations(
     connection: sqlite3.Connection,
 ) -> None:

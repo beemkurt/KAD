@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 
@@ -85,8 +86,6 @@ CREATE INDEX IF NOT EXISTS idx_vpn_clients_user_id
 CREATE INDEX IF NOT EXISTS idx_vpn_clients_inbound_id
     ON vpn_clients(inbound_id);
 
-CREATE UNIQUE INDEX IF NOT EXISTS uq_vpn_clients_user
-    ON vpn_clients(user_id);
 """
 
 
@@ -115,7 +114,7 @@ def init_db() -> None:
         exist_ok=True,
     )
 
-    with connect() as connection:
+    with closing(connect()) as connection, connection:
         connection.execute(
             "PRAGMA journal_mode = WAL"
         )
@@ -135,7 +134,7 @@ def upsert_user(
     last_name: str | None = None,
     language_code: str | None = None,
 ) -> int:
-    with connect() as connection:
+    with closing(connect()) as connection, connection:
         connection.execute(
             """
             INSERT INTO users (
@@ -193,7 +192,7 @@ def save_provisioned_state(
     inbound_id: int,
     total_bytes: int,
 ) -> None:
-    with connect() as connection:
+    with closing(connect()) as connection, connection:
         connection.execute(
             """
             INSERT INTO subscriptions (
@@ -239,10 +238,49 @@ def save_provisioned_state(
         connection.commit()
 
 
+
+def list_vpn_clients_for_user(
+    user_id: int,
+) -> list[dict[str, Any]]:
+    with closing(connect()) as connection, connection:
+        rows = connection.execute(
+            """
+            SELECT *
+            FROM vpn_clients
+            WHERE user_id = ?
+            ORDER BY id
+            """,
+            (user_id,),
+        ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def get_vpn_client_for_user(
+    *,
+    user_id: int,
+    vpn_client_id: int,
+) -> dict[str, Any] | None:
+    with closing(connect()) as connection, connection:
+        row = connection.execute(
+            """
+            SELECT *
+            FROM vpn_clients
+            WHERE id = ?
+              AND user_id = ?
+            LIMIT 1
+            """,
+            (vpn_client_id, user_id),
+        ).fetchone()
+
+    return dict(row) if row is not None else None
+
+
+
 def get_state_by_telegram_id(
     telegram_id: int,
 ) -> dict[str, Any] | None:
-    with connect() as connection:
+    with closing(connect()) as connection, connection:
         row = connection.execute(
             """
             SELECT
@@ -290,7 +328,7 @@ def get_state_by_telegram_id(
 def purge_user(
     telegram_id: int,
 ) -> bool:
-    with connect() as connection:
+    with closing(connect()) as connection, connection:
         cursor = connection.execute(
             """
             DELETE FROM users
@@ -305,7 +343,7 @@ def purge_user(
 
 
 def get_health() -> dict[str, Any]:
-    with connect() as connection:
+    with closing(connect()) as connection, connection:
         connection.execute("SELECT 1").fetchone()
 
         table_rows = connection.execute(
