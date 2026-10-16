@@ -299,7 +299,7 @@
             ?? vpn.expiry_time;
 
         elements.planName.textContent =
-            String(plan).replaceAll("_", " ");
+            active ? "VPN доступен" : "Доступ не активен";
 
         elements.expiresAt.textContent =
             formatDate(expiry);
@@ -994,14 +994,8 @@
         }
 
         try {
-            const [profile, plans] =
-                await Promise.all([
-                    api("/api/v1/me"),
-                    api("/api/v1/plans"),
-                ]);
-
+            const profile = await api("/api/v1/me");
             renderProfile(profile);
-            renderPlans(plans);
         } catch {
             elements.planName.textContent =
                 "Не удалось загрузить профиль";
@@ -1054,7 +1048,8 @@
             );
 
         const screenName =
-            availableScreens.has(requestedScreen)
+            requestedScreen !== "plans"
+            && availableScreens.has(requestedScreen)
                 ? requestedScreen
                 : "home";
 
@@ -1333,7 +1328,6 @@
 
     initialiseTelegram();
     initialiseNavigation();
-    loadCurrentOrder();
     initialiseNetwork();
     load();
 })();

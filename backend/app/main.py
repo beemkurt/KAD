@@ -182,6 +182,12 @@ async def create_current_user_order(
         require_telegram_user
     ),
 ) -> dict[str, object]:
+    if not settings.orders_enabled:
+        raise HTTPException(
+            status_code=404,
+            detail="Not found",
+        )
+
     get_or_create_profile(
         user,
         admin_id=settings.telegram_admin_id,

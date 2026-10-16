@@ -403,7 +403,7 @@ button {
     left: 12px;
     display: grid;
     width: min(calc(100% - 24px), 536px);
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 3px;
     margin: 0 auto;
     padding: 8px;
@@ -835,4 +835,10 @@ body.sheet-open {
 
 .current-order-details span:last-child {
     text-align: right;
+}
+
+/* Скрытые разделы KAD */
+.nav-item[hidden],
+.screen[hidden] {
+    display: none;
 }

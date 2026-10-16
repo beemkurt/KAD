@@ -9,6 +9,7 @@ from pydantic_settings import (
 
 class Settings(BaseSettings):
     app_env: str = "development"
+    orders_enabled: bool = False
 
     telegram_bot_token: SecretStr
     telegram_admin_id: int = 0
